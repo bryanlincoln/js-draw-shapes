@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Draw</title>
+        <style>
+            #canvas {
+                height:100px;
+                width:100px;
+                box-sizing: border-box;
+                margin:0;
+                box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.4);
+            }
+                #canvas div {
+                    display: inline-block;
+                }
+                #canvas .Círculo {
+                    border-radius:50%;
+                }
+
+            #listcontainer {
+                margin-top:20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="canvas"></div>
+        <br/>
+        <button onclick="controller.novo_desenho()" id="novo_botao">Novo desenho</button>
+
+        <form action="#" onsubmit="return false" style="display:none" id="novo_form">
+            <select name="forma" onchange="controller.muda_forma(this.form.forma.value)">
+                <option value="Quadrado">Quadrado</option>
+                <option value="Retângulo">Retângulo</option>
+                <option value="Círculo">Círculo</option>
+            </select>
+            <select name="cor" onchange="controller.muda_cor(this.form.cor.value)">
+                <option value="#f00">Vermelho</option>
+                <option value="#00f">Azul</option>
+            </select>
+            <input type="text" name="posicao" placeholder="[X, Y]" id="form_pos" disabled title="Clique e arraste no desenho acima!">
+            <input type="text" name="tamanho" placeholder="[B, H]" id="form_tam" disabled title="Clique e arraste no desenho acima!">
+            <button type="button" onclick="controller.salva_desenho();this.form.reset()">Fixar</button>
+        </form>
+        <button onclick="controller.cancela_novo()" id="cancela_novo" style="display: none">Cancelar</button>
+
+        <button onclick="controller.lista_desenhos()">Listar formas</button>
+        <div id="listcontainer">
+            Nenhuma forma ainda
+        </div>
+
+        <script src="interact.min.js"></script>
+        <script src="view.js"></script>
+        <script src="model.js"></script>
+        <script src="controller.js"></script>
+    
+        <script>
+            view = new View()
+            model = new Model()
+            controller = new Controller()
+        </script>
+    </body>
+</html>
